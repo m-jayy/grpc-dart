@@ -413,22 +413,22 @@ class ClientCall<Q, R> implements Response {
       _responseError(GrpcError.unavailable('Did not receive anything'));
       return;
     }
-    if (!_trailers.isCompleted) {
-      // if (_hasReceivedResponses) {
-      //   // Trailers are required after receiving data.
-      //   _responseError(GrpcError.unavailable('Missing trailers'));
-      //   return;
-      // }
-
-      // Only received a header frame and no data frames, so the header
-      // should contain "trailers" as well (Trailers-Only).
-      print('noTrailers');
-      print(_headerMetadata.toString());
-      _trailers.complete(_headerMetadata);
-
-      /// Process status error if necessary
-      _checkForErrorStatus(_headerMetadata);
-    }
+    // if (!_trailers.isCompleted) {
+    //   if (_hasReceivedResponses) {
+    //     // Trailers are required after receiving data.
+    //     _responseError(GrpcError.unavailable('Missing trailers'));
+    //     return;
+    //   }
+    //
+    //   // Only received a header frame and no data frames, so the header
+    //   // should contain "trailers" as well (Trailers-Only).
+    //   print('noTrailers');
+    //   print(_headerMetadata.toString());
+    //   _trailers.complete(_headerMetadata);
+    //
+    //   /// Process status error if necessary
+    //   _checkForErrorStatus(_headerMetadata);
+    // }
     _responseTimeline?.finish();
     _timeoutTimer?.cancel();
     _responses.close();
