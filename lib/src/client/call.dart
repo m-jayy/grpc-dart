@@ -429,6 +429,9 @@ class ClientCall<Q, R> implements Response {
     //   /// Process status error if necessary
     //   _checkForErrorStatus(_headerMetadata);
     // }
+    if (!_hasReceivedResponses) {
+      _checkForErrorStatus(_headerMetadata);
+    }
     _responseTimeline?.finish();
     _timeoutTimer?.cancel();
     _responses.close();
